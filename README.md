@@ -12,7 +12,7 @@ Cliquer sur <a href="https://github.com/irenenoelle/Entrevoisins.git">Entrevoisi
 
 Cliquer sur <b>Clone or Download</b>><b>Download ZIP</b> 
 
-<img src =  "https://github.com/irenenoelle/Entrevoisins/blob/main/Download_code.png" title="Download Project" alt="Download project">
+<img src ="https://github.com/irenenoelle/Entrevoisins/blob/master/Download_code.png">
 
 Décompressez le fichier dans votre dossier local.
 
@@ -32,6 +32,6 @@ Lancez l'émulateur avec le bouton de <b> lecture vert</b>
 
 L'application se lance (cela peut prendre quelques minutes si l'émulateur vient d'être crée).
 
-<img src =  "https://github.com/irenenoelle/Entrevoisins/blob/main/Capture_appli.PNG" title="Capture application">
+<img src = "https://github.com/irenenoelle/Entrevoisins/blob/master/Capture_appli.PNG">
 
 <b> Bonne navigation!</b> 
