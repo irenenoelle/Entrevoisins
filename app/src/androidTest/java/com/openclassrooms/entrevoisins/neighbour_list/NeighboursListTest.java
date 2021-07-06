@@ -90,6 +90,7 @@ public class NeighboursListTest {
         // Cliquer sur l'élément en identifiant le conteneur parent et ses enfants
         onView(allOf(withId(R.id.list_neighbours), isDisplayed()))
                 .perform(actionOnItemAtPosition(mPosition, click()));
+        // Verifier qu'on est bien sur la page profil en cliquant sur le bouton favoris
         onView(allOf(withId(R.id.item_is_favorites))).perform(click());
         pressBack();
     }
@@ -129,9 +130,10 @@ public class NeighboursListTest {
         // Cliquer sur l'onglet des favoris
         onView(withContentDescription("Favorites"))
                 .perform(click());
-        // Vérifier la liste des utilisateurs en favoris
+        // Vérifier que la liste affcichée et bien celle des favoris
         onView(allOf(withId(R.id.list_neighbours), isDisplayed()))
                 .check(withItemCount(mApiService.getFavoritesNeighbour().size()));
+        // Cliquer sur l'utilisateur pour une 2e vérification
         onView(allOf(withId(R.id.list_neighbours), isDisplayed()))
                 .perform(actionOnItemAtPosition(mPosition, click()));
     }
