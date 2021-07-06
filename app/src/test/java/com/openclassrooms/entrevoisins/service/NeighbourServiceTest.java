@@ -12,7 +12,6 @@ import org.junit.runners.JUnit4;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
@@ -46,7 +45,7 @@ public class NeighbourServiceTest {
 
     @Test
     public void createNeighbourWithSuccess() {
-        Neighbour neighbourToCreate = new Neighbour(0, "Noelle", "", "52 rue vauban", "0769032543", "Ingénieur informatique");
+        Neighbour neighbourToCreate = new Neighbour(0, "Noelle", "", "52 rue vauban", "0769032543", "Ingenieur Informatique");
         //Neighbour neighbourToCreate = service.getNeighbours().get(0);
         service.createNeighbour(neighbourToCreate);
         assertTrue(service.getNeighbours().contains(neighbourToCreate));
@@ -69,7 +68,7 @@ public class NeighbourServiceTest {
         List<Neighbour> neighbours = service.getFavoritesNeighbour();
         for (Neighbour n: neighbours)
         {
-            assertThat(n.getFavorite(), is(true));
+            assertTrue(n.getFavorite());
         }
     }
 
@@ -77,7 +76,7 @@ public class NeighbourServiceTest {
     public void addFavoriteWithSuccess() {
         Neighbour favNeighbourToAdd = service.getNeighbours().get(0);
         service.addFavorite(favNeighbourToAdd);
-        assertEquals(true, favNeighbourToAdd.getFavorite());
+        assertTrue(favNeighbourToAdd.getFavorite());
         assertTrue(service.getFavoritesNeighbour().contains(favNeighbourToAdd));
     }
 
@@ -85,7 +84,7 @@ public class NeighbourServiceTest {
     public void removeFavoriteWithSuccess() {
         Neighbour favNeighbourToRemove = service.getNeighbours().get(0);
         service.removeFavorite(favNeighbourToRemove);
-        assertEquals(false, favNeighbourToRemove.getFavorite());
+        assertFalse(favNeighbourToRemove.getFavorite());
         assertFalse(service.getFavoritesNeighbour().contains(favNeighbourToRemove));
     }
 }

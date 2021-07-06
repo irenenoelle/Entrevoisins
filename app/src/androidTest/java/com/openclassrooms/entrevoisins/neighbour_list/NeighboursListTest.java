@@ -25,6 +25,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.hasMinimumChild
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withResourceName;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static com.openclassrooms.entrevoisins.utils.RecyclerViewItemCountAssertion.withItemCount;
 import static org.hamcrest.Matchers.allOf;
@@ -38,15 +39,15 @@ import static org.hamcrest.core.IsNull.notNullValue;
 @RunWith(AndroidJUnit4.class)
 public class NeighboursListTest {
 
-    private static int ITEMS_COUNT = 12;
-    private int mPosition = 0;
+    private static final int ITEMS_COUNT = 12;
+    private final int mPosition = 0;
 
     private ListNeighbourActivity mActivity;
     private NeighbourApiService mApiService;
 
     @Rule
     public ActivityTestRule<ListNeighbourActivity> mActivityRule =
-            new ActivityTestRule(ListNeighbourActivity.class);
+            new ActivityTestRule<>(ListNeighbourActivity.class);
 
     @Before
     public void setUp()
@@ -89,15 +90,17 @@ public class NeighboursListTest {
         // Cliquer sur l'élément en identifiant le conteneur parent et ses enfants
         onView(allOf(withId(R.id.list_neighbours), isDisplayed()))
                 .perform(actionOnItemAtPosition(mPosition, click()));
+        onView(allOf(withId(R.id.item_is_favorites))).perform(click());
+        pressBack();
     }
 
     @Test
-    public void onDetailedProfileLaunch_textView_containName()
+    public void viewNeighbourDetailsLaunch_textView_containName()
     {
-        //Cliquer sur l'élément en identifiant le conteneur parent et ses enfants
+        // Cliquer sur l'élement en identifiant le conteneur parent et ses enfants
         onView(allOf(withId(R.id.list_neighbours), isDisplayed()))
                 .perform(actionOnItemAtPosition(mPosition, click()));
-        //Vérifier que le neighbourName est affiché sur l'écran viewNeighbour
+        // Verifier que le neighbourName est affiché sur l'écran viewNeighbour
         onView(withId(R.id.item_view_name))
                 .check(matches(withText(mApiService.getNeighbours().get(mPosition).getName())));
     }
@@ -113,11 +116,24 @@ public class NeighboursListTest {
                 .perform(click());
         // Retour à la page d'accueil
         pressBack();
+
+        // Cliquer sur l'élément 2
+        onView(allOf(withId(R.id.list_neighbours), isDisplayed()))
+                .perform(actionOnItemAtPosition(mPosition+1, click()));
+        // Cliquer pour ajouter aux favoris
+        onView(withId(R.id.item_is_favorites))
+                .perform(click());
+        // Retour à la page d'accueil
+        pressBack();
+
         // Cliquer sur l'onglet des favoris
         onView(withContentDescription("Favorites"))
                 .perform(click());
-        // Vérifier l'affichage des favoris
+        // Vérifier la liste des utilisateurs en favoris
         onView(allOf(withId(R.id.list_neighbours), isDisplayed()))
-                .check(matches(isDisplayed()));
+                .check(withItemCount(mApiService.getFavoritesNeighbour().size()));
+        onView(allOf(withId(R.id.list_neighbours), isDisplayed()))
+                .perform(actionOnItemAtPosition(mPosition, click()));
     }
+
 }

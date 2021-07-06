@@ -3,8 +3,6 @@ package com.openclassrooms.entrevoisins.service;
 import com.openclassrooms.entrevoisins.model.Neighbour;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -12,7 +10,7 @@ import java.util.List;
  */
 public class DummyNeighbourApiService implements  NeighbourApiService {
 
-    private List<Neighbour> neighbours = DummyNeighbourGenerator.generateNeighbours();
+    private final List<Neighbour> neighbours = DummyNeighbourGenerator.generateNeighbours();
 
     /**
      * {@inheritDoc}
@@ -75,7 +73,7 @@ public class DummyNeighbourApiService implements  NeighbourApiService {
      */
     @Override
     public List<Neighbour> getFavoritesNeighbour() {
-        List<Neighbour> fav = new ArrayList<Neighbour>();
+        List<Neighbour> fav = new ArrayList<>();
         for(Neighbour n : neighbours) {
             if (n.getFavorite()) {
                 fav.add(n);
