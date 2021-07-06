@@ -6,7 +6,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
@@ -59,22 +58,19 @@ public class ViewNeighbourActivity extends AppCompatActivity{
             mFavorite.setImageResource(R.drawable.ic_star_border_white_24dp);
         }
 
-        mFavorite.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        mFavorite.setOnClickListener(view -> {
 
-                // Ajouter le voisin aux favoris si true et retire si false
-                if (n.getFavorite()) {
-                    mFavorite.setImageResource(R.drawable.ic_star_border_white_24dp);
-                    mApiService.removeFavorite(n);
-                    n.setFavorite(false);
-                    Snackbar.make(view, name + " a été rétiré(e) des favoris!", Snackbar.LENGTH_LONG).show();
-                } else {
-                    mFavorite.setImageResource(R.drawable.ic_star_white_24dp);
-                    mApiService.addFavorite(n);
-                    n.setFavorite(true);
-                    Snackbar.make(view, name + " a été ajouté(e) aux favoris!", Snackbar.LENGTH_LONG).show();
-                }
+            // Ajouter le voisin aux favoris si true et retire si false
+            if (n.getFavorite()) {
+                mFavorite.setImageResource(R.drawable.ic_star_border_white_24dp);
+                mApiService.removeFavorite(n);
+                n.setFavorite(false);
+                Snackbar.make(view, name + " a été rétiré(e) des favoris!", Snackbar.LENGTH_LONG).show();
+            } else {
+                mFavorite.setImageResource(R.drawable.ic_star_white_24dp);
+                mApiService.addFavorite(n);
+                n.setFavorite(true);
+                Snackbar.make(view, name + " a été ajouté(e) aux favoris!", Snackbar.LENGTH_LONG).show();
             }
         });
 
